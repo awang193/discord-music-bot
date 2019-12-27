@@ -1,0 +1,25 @@
+{
+  "name": "discord-music-bot",
+  "version": "1.0.0",
+  "description": "Testing NodeJS interaction with Discord API",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awang193/discord-music-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/awang193/discord-music-bot/issues"
+  },
+  "homepage": "https://github.com/awang193/discord-music-bot#readme",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.2"
+  }
+}
