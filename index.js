@@ -1,14 +1,24 @@
 require('dotenv').config();
-
+const fs = require('fs');
 const Discord = require('discord.js');
-const bot = new Discord.Client();
+
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+
+// Invoke handlers
+fs.readdirSync('./handlers/').forEach(handler => {
+    require('./handlers/' + handler)(client);
+});
+
+// Log in
 const discord_token = process.env.DISCORD_TOKEN;
+client.login(discord_token);
 
-bot.login(discord_token);
-
-bot.on('ready', () => {
-    console.info(`Ya boi has logged in as ${bot.user.tag}`);
-    bot.user.setPresence({
+// On login, show message and log
+client.on('ready', () => {
+    console.info(`Ya boi has logged in as ${client.user.tag}`);
+    client.user.setPresence({
         status: 'online',
         game: {
             name: 'development',
@@ -17,10 +27,8 @@ bot.on('ready', () => {
     });
 });
 
-bot.on('message', async (message) => {
+client.on('message', async message => {
     const prefix = 'm!'
-
-    let flag = 0;
 
     if (message.content.startsWith(prefix)) {
         // Remove prefix, then split into tokens using space as delimiter
@@ -29,17 +37,11 @@ bot.on('message', async (message) => {
         // Grab command (first token) and convert to lowercase
         const cmd = args.shift().toLowerCase();
         
-        switch (cmd) {
-            case 'ping':
-                const msg = await message.channel.send('```🏓 ~ Ping...```');
-                await new Promise(r => setTimeout(r, Math.random() * 1000));
-                msg.edit('```🏓 ~         Pong!```');
+        let commandToRun = client.commands.get(cmd);
+
+        if (commandToRun) {
+            commandToRun.run(client, message, args);
+            console.log(`<COMMAND> ${commandToRun.name} ran by ${message.author.username}`);
         }
     }
-    else
-    {
-        flag = 1;
-    }
-
-    return flag;
 });
