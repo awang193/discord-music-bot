@@ -17,23 +17,23 @@ bot.on('ready', () => {
     });
 });
 
-bot.on('message', async (msg) => {
+bot.on('message', async (message) => {
     const prefix = 'm!'
 
     let flag = 0;
 
-    if (msg.content.startsWith(prefix)) {
+    if (message.content.startsWith(prefix)) {
         // Remove prefix, then split into tokens using space as delimiter
-        const args = msg.content.slice(prefix.length).trim().split();
+        const args = message.content.slice(prefix.length).trim().split();
         
         // Grab command (first token) and convert to lowercase
         const cmd = args.shift().toLowerCase();
-
-        console.info(`${args}`);
         
-        switch (args[0]) {
+        switch (cmd) {
             case 'ping':
-                msg.channel.send('pong!');
+                const msg = await message.channel.send('```🏓 ~ Ping...```');
+                await new Promise(r => setTimeout(r, Math.random() * 1000));
+                msg.edit('```🏓 ~         Pong!```');
         }
     }
     else
