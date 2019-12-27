@@ -23,8 +23,12 @@ bot.on('message', async (msg) => {
     let flag = 0;
 
     if (msg.content.startsWith(prefix)) {
-        // Remove prefix, then split into tokens using space as delimiter, then shift everything to lowercase
+        // Remove prefix, then split into tokens using space as delimiter
         const args = msg.content.slice(prefix.length).trim().split();
+        
+        // Grab command (first token) and convert to lowercase
+        const cmd = args.shift().toLowerCase();
+
         console.info(`${args}`);
         
         switch (args[0]) {
