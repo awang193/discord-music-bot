@@ -21,7 +21,9 @@
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
-    "nodemon": "^2.0.2"
+    "jsonfile": "^5.0.0",
+    "nodemon": "^2.0.2",
+    "ytdl": "^1.1.0"
   },
   "devDependencies": {
     "ascii-table": "0.0.9"
