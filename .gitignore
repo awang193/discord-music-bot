@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 # Ignore ENV variables
 .env
 
 # Ignore node_modules
 node_modules/
+=======
+# Ignore environment variables
+.env
+
+# Ignore node_modules
+node_modules/
+
+# Ignore error logs
+yarn-error.log
+>>>>>>> typescript
